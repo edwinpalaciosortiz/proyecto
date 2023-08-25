@@ -14,7 +14,7 @@ public interface ObraService{
 
     List<ObraDto> listarObras();
 
-    void eliminarObra(String idObra);
+    String eliminarObra(String idObra);
 
     //public List<ObraDto> listarObras();
     //public void eliminarObra(String idObra);
