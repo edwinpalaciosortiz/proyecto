@@ -3,17 +3,18 @@ package com.clase.proyecto.domain.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Table(name = "tb_obra")
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class Obra {
+
 
     @Id
     String id;
@@ -23,6 +24,7 @@ public class Obra {
     String materiales;
     String tipo;
     Double precio;
-    Date fechapublicacion;
+    LocalDate fechapublicacion;
+    LocalDate fechaCreacion;
 
 }
