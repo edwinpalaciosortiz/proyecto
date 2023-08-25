@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -51,8 +52,17 @@ public class ObraServiceImpl implements ObraService{
         return new ArrayList<ObraDto>();
     };
     @Override
-    public void eliminarObra(String idObra){
-        obraRepository.deleteById(idObra);
-    };
+    public String eliminarObra(String idObra){
+        if (idObra.isBlank())
+            throw new RuntimeException("El ID de la obra no puede estar vacio");
+
+        return obraRepository.findById(idObra)
+                .map(Obra::getId)
+                .map(id -> {
+                    obraRepository.deleteById(id);
+                    return "La obra con id ".concat(idObra).concat(" fue eliminada correctamente");
+                })
+                .orElseThrow(() ->  new RuntimeException("La obra que intenta eliminar no existe"));
+    }
 
 }

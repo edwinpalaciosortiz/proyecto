@@ -3,6 +3,7 @@ package com.clase.proyecto.domain.service;
 import com.clase.proyecto.api.dto.CreateObraDto;
 import com.clase.proyecto.domain.models.Obra;
 import com.clase.proyecto.domain.repository.ObraRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -57,5 +58,61 @@ class ObraServiceImplTest {
         );
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode().value());
+    }
+
+    @Test
+    void eliminarObra() {
+        Obra obra = Obra.builder()
+                .id("123")
+                .autor("edwin")
+                .nombre("obra 1")
+                .tipo("fictica")
+                .fechaCreacion(LocalDate.now())
+                .precio(0.0)
+                .materiales("Imaginación")
+                .build();
+        when(obraRepository.findById("123")).thenReturn(Optional.of(obra));
+
+        String response = obraServiceImp.eliminarObra("123");
+
+        assertTrue(response.equalsIgnoreCase("La obra con id 123 fue eliminada correctamente"));
+    }
+
+    @Test
+    void eliminarObraNoExistente() {
+        Obra obra = Obra.builder()
+                .id("123")
+                .autor("edwin")
+                .nombre("obra 1")
+                .tipo("fictica")
+                .fechaCreacion(LocalDate.now())
+                .precio(0.0)
+                .materiales("Imaginación")
+                .build();
+
+        Throwable exception = assertThrows(RuntimeException.class, () ->
+            obraServiceImp.eliminarObra("987")
+        );
+
+        assertTrue(exception.getMessage().equalsIgnoreCase("La obra que intenta eliminar no existe"));
+    }
+
+    @Test
+    void eliminarObraConIdVacio() {
+        Obra obra = Obra.builder()
+                .id("123")
+                .autor("edwin")
+                .nombre("obra 1")
+                .tipo("fictica")
+                .fechaCreacion(LocalDate.now())
+                .precio(0.0)
+                .materiales("Imaginación")
+                .build();
+
+        Throwable exception = assertThrows(RuntimeException.class, () ->
+            obraServiceImp.eliminarObra("")
+        );
+
+        assertTrue(exception.getMessage().equalsIgnoreCase("El ID de la obra no puede estar vacio"));
     }
 }

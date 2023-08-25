@@ -22,7 +22,7 @@ public class ObraController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseMessageDTO>  eliminarObra(@PathVariable String id){
         return ResponseEntity.ok(ResponseMessageDTO.builder()
-                        .message("Obra eliminada correctamente")
+                .message(obraService.eliminarObra(id))
                 .build());
     }
 
