@@ -62,7 +62,6 @@ class ObraServiceImplTest {
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode().value());
     }
-
     @Test
     void eliminarObra() {
         Obra obra = Obra.builder()
@@ -80,7 +79,6 @@ class ObraServiceImplTest {
 
         assertTrue(response.equalsIgnoreCase("La obra con id 123 fue eliminada correctamente"));
     }
-
     @Test
     void eliminarObraNoExistente() {
         Obra obra = Obra.builder()
