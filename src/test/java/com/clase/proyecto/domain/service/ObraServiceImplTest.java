@@ -1,6 +1,7 @@
 package com.clase.proyecto.domain.service;
 
 import com.clase.proyecto.api.dto.CreateObraDto;
+import com.clase.proyecto.api.dto.ObraDto;
 import com.clase.proyecto.domain.models.Obra;
 import com.clase.proyecto.domain.repository.ObraRepository;
 import org.junit.jupiter.api.Assertions;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -99,20 +102,50 @@ class ObraServiceImplTest {
 
     @Test
     void eliminarObraConIdVacio() {
-        Obra obra = Obra.builder()
-                .id("123")
-                .autor("edwin")
-                .nombre("obra 1")
-                .tipo("fictica")
-                .fechaCreacion(LocalDate.now())
-                .precio(0.0)
-                .materiales("Imaginación")
-                .build();
-
         Throwable exception = assertThrows(RuntimeException.class, () ->
             obraServiceImp.eliminarObra("")
         );
 
         assertTrue(exception.getMessage().equalsIgnoreCase("El ID de la obra no puede estar vacio"));
+    }
+
+    @Test
+    void listarObras(){
+
+        List<ObraDto> obrasDTO = List.of(
+                ObraDto.builder()
+                        .id("test1")
+                        .nombre("test")
+                        .autor("test")
+                        .precio(0.0)
+                        .tipo("test")
+                        .build()
+        );
+
+        Iterable<Obra> todas = List.of(
+                Obra.builder()
+                        .id("test1")
+                        .nombre("test")
+                        .autor("test")
+                        .fechapublicacion(LocalDate.now())
+                        .fechaCreacion(LocalDate.now())
+                        .precio(0.0)
+                        .tipo("test")
+                        .build()
+        );
+        when(obraRepository.findAll()).thenReturn(todas);
+
+        assertEquals(obrasDTO.get(0).getId(),obraServiceImp.listarObras().get(0).getId());
+    }
+
+    @Test
+    void listarTodasSinObras(){
+
+        Throwable exception = assertThrows(IllegalArgumentException.class, () ->
+                obraServiceImp.listarObras()
+        );
+
+        assertTrue(exception.getMessage().equalsIgnoreCase("no hay ninguna obra para mostrar"));
+
     }
 }
