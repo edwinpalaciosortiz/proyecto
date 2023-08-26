@@ -1,19 +1,57 @@
 {
 	"info": {
-		"_postman_id": "0045918b-9f6d-4dd1-98d6-1f938faea331",
-		"name": "Electiva III - Galeria Arte",
+		"_postman_id": "a30c96f9-170e-4532-bb5c-ad01c2c1f3fa",
+		"name": "proyecto",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18810362"
+		"_exporter_id": "13581582"
 	},
 	"item": [
 		{
-			"name": "Registrar Obra",
+			"name": "listarObras",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:7878/obra/listarObras",
+					"host": [
+						"localhost"
+					],
+					"port": "7878",
+					"path": [
+						"obra",
+						"listarObras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:7878/obra/869ccb6a-44e9-426e-a3e7-f2ec9c68cf50",
+					"host": [
+						"localhost"
+					],
+					"port": "7878",
+					"path": [
+						"obra",
+						"869ccb6a-44e9-426e-a3e7-f2ec9c68cf50"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Parque\",\r\n    \"autor\": \"tu mama\",\r\n    \"materiales\": \"Pintura\",\r\n    \"precio\": 250000,\r\n    \"tipo\": \"Pintado\",\r\n    \"fechaCreacion\": \"2023-08-25\"\r\n}",
+					"raw": "{\n        \"nombre\": \"Monalisa\",\n        \"autor\": \"Leonardo Da vinci\",\n        \"precio\": 700000000,\n        \"materiales\":\"oleo\",\n        \"tipo\": \"Pintura\",\n        \"fechaCreacion\":\"1503-01-11\"\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,8 +59,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:7878/obra/",
-					"protocol": "http",
+					"raw": "localhost:7878/obra/",
 					"host": [
 						"localhost"
 					],
@@ -30,26 +67,6 @@
 					"path": [
 						"obra",
 						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar Obra",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7878/obra/6aa5b93d-e5c3-40b1-8eb4-bf8518285716",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7878",
-					"path": [
-						"obra",
-						"6aa5b93d-e5c3-40b1-8eb4-bf8518285716"
 					]
 				}
 			},
