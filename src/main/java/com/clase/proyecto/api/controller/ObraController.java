@@ -45,7 +45,12 @@ public class ObraController {
     }
 
     @GetMapping ("/listarObras")
-    public ResponseEntity<String> listarObras(){
-        return  ResponseEntity.ok("Ok");
+    public ResponseEntity<?> listarObras(){
+        try{
+            return  new ResponseEntity<>(obraService.listarObras(),HttpStatus.FOUND);
+
+        }catch (IllegalArgumentException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }

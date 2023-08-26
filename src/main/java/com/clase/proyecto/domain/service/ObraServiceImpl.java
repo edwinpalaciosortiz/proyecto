@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @Getter
@@ -49,7 +52,23 @@ public class ObraServiceImpl implements ObraService{
     @Override
     public List<ObraDto> listarObras(){
 
-        return new ArrayList<ObraDto>();
+        List<ObraDto> todas = StreamSupport.stream(obraRepository.findAll().spliterator(),false)
+                .map(obra ->
+                    ObraDto.builder()
+                                    .id(obra.getId())
+                                    .nombre(obra.getNombre())
+                                    .autor(obra.getAutor())
+                                    .precio(obra.getPrecio())
+                                    .tipo(obra.getTipo())
+                            .build()
+                ).toList();
+
+        if(todas.isEmpty()){
+            throw new IllegalArgumentException("no hay ninguna obra para mostrar");
+        }
+
+        return todas;
+        //return new ArrayList<ObraDto>();
     };
     @Override
     public String eliminarObra(String idObra){

@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "0045918b-9f6d-4dd1-98d6-1f938faea331",
+		"name": "Electiva III - Galeria Arte",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18810362"
+	},
+	"item": [
+		{
+			"name": "Registrar Obra",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Parque\",\r\n    \"autor\": \"tu mama\",\r\n    \"materiales\": \"Pintura\",\r\n    \"precio\": 250000,\r\n    \"tipo\": \"Pintado\",\r\n    \"fechaCreacion\": \"2023-08-25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7878/obra/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7878",
+					"path": [
+						"obra",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Obra",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7878/obra/6aa5b93d-e5c3-40b1-8eb4-bf8518285716",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7878",
+					"path": [
+						"obra",
+						"6aa5b93d-e5c3-40b1-8eb4-bf8518285716"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
